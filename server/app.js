@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({extended:false});
 var port = process.env.PORT || 8080;
 
+var connectionString = 'postgres://localhost:5432/theList';
+
 app.listen( port, function( req, res ){
   console.log( 'server listening on', port );
 }); // end spin up server
