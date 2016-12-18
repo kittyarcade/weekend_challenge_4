@@ -13,17 +13,17 @@ var newTask = function(){
   objectToSend = {
     task: $('#task').val()
   };
-  console.log(objectToSend);
+  $.ajax({
+    type:'POST',
+    url:'/addTask',
+    data: objectToSend,
+    success: function(response){
+      console.log('Posted: ', response);
+    }
+  });
 };
 
-$.ajax({
-  type:'POST',
-  url:'/addTask',
-  data: objectToSend,
-  success: function(response){
-    console.log('Posted: ', response);
-  }
-});
-});
+
+// });
 
 }); //end document ready
