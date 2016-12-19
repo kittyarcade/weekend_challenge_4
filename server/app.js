@@ -22,7 +22,6 @@ app.get( '/', function( req, res ){
 //POST
 app.post('/addTask', urlEncodedParser, function(req,res){
   console.log('new task added: ', req.body);
-  todos.push(req.body);
   pg.connect(connectionString, function(err, client, done){
     if(err){
       console.log(err);
@@ -43,6 +42,7 @@ app.get('/getTask', function(req,res){
       console.log(err);
     } else {
       var query = client.query('SELECT task FROM tasks');
+      var todos = [];
       query.on('row', function(row){
         todos.push(row);
       });
