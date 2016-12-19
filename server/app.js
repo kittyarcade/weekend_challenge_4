@@ -35,7 +35,25 @@ app.post('/addTask', urlEncodedParser, function(req,res){
   });
 });
 
-
+//GET
+app.get('/getTask', function(req,res){
+  console.log('GET hit');
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log(err);
+    } else {
+      var query = client.query('SELECT task FROM tasks');
+      query.on('row', function(row){
+        todos.push(row);
+      });
+      query.on('end', function(){
+        done();
+        console.log(todos);
+        res.send(todos);
+      });
+    }
+  });
+});//end GET
 
 
 

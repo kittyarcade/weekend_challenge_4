@@ -1,6 +1,7 @@
 $(document).ready(function(){
   console.log('meow');
 
+
 //button to add new task and then run newTask function
 $('#addTask').on('click', function(){
   console.log('clicked');
@@ -11,7 +12,7 @@ $('#addTask').on('click', function(){
 //newTask function creates object
 var newTask = function(){
   objectToSend = {
-    task: $('#task').val()
+    task: $('#task').val(),
   };
   $.ajax({
     type:'POST',
@@ -19,11 +20,28 @@ var newTask = function(){
     data: objectToSend,
     success: function(response){
       console.log('Posted: ', response);
+      getTasks();
+
     }
-  });
+  });//end ajax call
 };
 
+//getTasks back
+function getTasks(){
+  $.ajax ({
+    type: 'GET',
+    url: 'getTask',
+    success: function(response){
+      console.log('back from get', response);
+      var outputText = '';
+      for(var i = 0; i < response.length; i++){
+        outputText += '<p>' + response[i].task + '</p><button class="deleteButton" data="' + response[i].id + '">Delete Task</button>';
+      }
+      $('#theTasks').html(outputText);
 
-// });
+    }
+  }); //end GET ajax call
+}
+
 
 }); //end document ready
