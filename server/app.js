@@ -56,12 +56,12 @@ app.get('/getTask', function(req,res){
 });//end GET
 
 //PUT for removing tasking
-app.post('/remove', urlEncodedParser, function(req, res){
+app.put('/remove', urlEncodedParser, function(req, res){
   pg.connect(connectionString, function(err, client, done){
     if(err){
       console.log(err);
     } else {
-      client.query('DELETE FROM tasks WHERE id = ' + [req.body.id] + ';');
+      client.query('DELETE FROM tasks WHERE id = ' + req.body.id + ';');
         done();
         res.send('removed');
     }

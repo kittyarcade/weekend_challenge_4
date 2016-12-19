@@ -46,19 +46,21 @@ function getTasks(){
 } // end getTasks function
 
 function removeTask(){
-  if(confirm('Do you really want to delete?')){
-    $.ajax({
-      type: 'POST',
-      url: '/remove',
-      data: removed = {
-        id: $(this).attr('data')
-      },
-      success: function(response){
-        console.log('back from remove', response);
-        getTasks();
-      }
-    });
-  }
+  var id = $(this).attr('data');
+  $.ajax ({
+    type: 'PUT',
+    url: 'remove',
+    data: {
+      id: id
+    },
+    success: function(response){
+      console.log('from put');
+      getTasks();
+    },
+    error: function(){
+      console.log('error with ajax');
+    }
+  });//end ajax call
 }//end removeTask function
 
 }); //end document ready
