@@ -33,6 +33,7 @@ function getTasks(){
     url: 'getTask',
     success: function(response){
       console.log('back from get', response);
+      $('#theTasks').html('');
       var outputText = '';
       for(var i = 0; i < response.length; i++){
         outputText += '<p>' + response[i].task + '</p><button class="deleteButton" data="' + response[i].id + '">Delete Task</button>';
