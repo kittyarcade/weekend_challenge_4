@@ -1,0 +1,62 @@
+body{
+  background-color: rgb(91, 94, 112);
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1{
+  letter-spacing: 3px;
+  font-size: 40px;
+}
+
+#addTask {
+  border-radius: 5px;
+  background-color: rgb(163, 163, 163);
+  color: white;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#addTask:hover {
+  background-color: white;
+  color: black;
+}
+
+#task {
+  padding: 10px;
+  border: none;
+  margin: 5px;
+}
+
+#theTasks{
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+
+.complete{
+  border-radius: 5px;
+  background-color: rgb(163, 163, 163);
+  color: white;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.complete:hover{
+  background-color: white;
+  color: black;
+}
+
+.remove{
+  border-radius: 5px;
+  background-color: rgb(194, 78, 78);
+  color: white;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
