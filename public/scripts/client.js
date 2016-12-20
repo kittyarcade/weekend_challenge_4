@@ -55,6 +55,7 @@ function getTasks(){
 } // end getTasks function
 
 function removeTask(){
+  if(confirm('Are you sure?')){
   var deleteItem = {
     id: $(this).attr('data')
   };
@@ -71,6 +72,7 @@ function removeTask(){
       console.log('error with ajax');
     }
   });//end ajax call
+}
   getTasks();
 }//end removeTask function
 
