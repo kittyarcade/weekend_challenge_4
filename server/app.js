@@ -45,6 +45,7 @@ app.get('/getTask', function(req,res){
       var todos = [];
       query.on('row', function(row){
         todos.push(row);
+        // console.log('todos in get: ', todos);
       });
       query.on('end', function(){
         done();
