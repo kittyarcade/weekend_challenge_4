@@ -9,7 +9,10 @@ $('#addTask').on('click', function(){
   $('#task').val(''); //empties input field after click
 });
 
+//remove button
 $(document).on('click', '.remove', removeTask);
+//task completed button
+$(document).on('click', '.complete', completeTask);
 
 
 //newTask function creates object
@@ -40,7 +43,11 @@ function getTasks(){
       var outputText = '';
       for(var i = 0; i < response.length; i++){
       items.push(response[i]);
+      if(response[i].completed === false){
         outputText += '<p>' + response[i].task + '</p><p><button class="complete" data="' + response[i].id + '">Completed?</button><button class="remove" data="' + response[i].id + '">Remove</button></p>';
+      } else {
+        outputText += '<p class="completed">' + response[i].task + '</p><p><button class="disabled" data="' + response[i].id + '">Done!</button><button class="remove" data="' + response[i].id + '">Remove</button></p>';
+        }
       }
       $('#theTasks').html(outputText);
     }
@@ -51,8 +58,8 @@ function removeTask(){
   var deleteItem = {
     id: $(this).attr('data')
   };
-  console.log(deleteItem);
-  console.log(objectToSend);
+  // console.log(deleteItem);
+  // console.log(objectToSend);
   $.ajax ({
     type: 'DELETE',
     url: 'remove',
@@ -66,5 +73,24 @@ function removeTask(){
   });//end ajax call
   getTasks();
 }//end removeTask function
+
+function completeTask(){
+  var completedTask = {
+    id: $(this).attr('data')
+  };
+  $.ajax({
+    type: 'PUT',
+    url: 'taskCompleted',
+    data: completedTask,
+    success: function(response){
+      console.log('from task complete call');
+    },
+    error: function(response){
+      console.log('error with task complete call');
+  }
+  }); //end ajax call
+  getTasks();
+}//end completeTask
+
 
 }); //end document ready

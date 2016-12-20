@@ -69,5 +69,18 @@ app.delete('/remove', urlEncodedParser, function(req, res){
   });
 });//end delete
 
+//for complete tasks
+app.put('/taskCompleted', urlEncodedParser, function(req,res){
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log(err);
+    } else {
+      client.query("UPDATE tasks SET completed = 'true' WHERE id = " + req.body.id + ";");
+      done();
+      res.send('task completed');
+    }
+  }); //end pg
+});//end put
+
 // static folder
 app.use( express.static( 'public' ) );
