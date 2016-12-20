@@ -46,16 +46,16 @@ function getTasks(){
 } // end getTasks function
 
 function removeTask(){
-  var id = $(this).attr('data');
+  var deleteItem = {
+    id: $(this).attr('data')
+  };
+  console.log(deleteItem);
   $.ajax ({
-    type: 'PUT',
+    type: 'DELETE',
     url: 'remove',
-    data: {
-      id: id
-    },
+    data: deleteItem,
     success: function(response){
-      console.log('from put');
-      getTasks();
+      console.log('from delete');
     },
     error: function(){
       console.log('error with ajax');

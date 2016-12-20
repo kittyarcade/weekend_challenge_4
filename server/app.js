@@ -55,18 +55,18 @@ app.get('/getTask', function(req,res){
   });
 });//end GET
 
-//PUT for removing tasking
-app.put('/remove', urlEncodedParser, function(req, res){
+//for removing tasking
+app.delete('/remove', urlEncodedParser, function(req, res){
   pg.connect(connectionString, function(err, client, done){
     if(err){
       console.log(err);
     } else {
-      client.query('DELETE FROM tasks WHERE id = ' + req.body.id + ';');
+      client.query('DELETE FROM tasks WHERE id=$1',[todos.task]);
         done();
         res.send('removed');
     }
   });
-});//end PUT
+});//end delete
 
 // static folder
 app.use( express.static( 'public' ) );
