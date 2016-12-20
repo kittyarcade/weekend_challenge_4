@@ -41,7 +41,7 @@ app.get('/getTask', function(req,res){
     if(err){
       console.log(err);
     } else {
-      var query = client.query('SELECT task FROM tasks');
+      var query = client.query('SELECT * FROM tasks');
       var todos = [];
       query.on('row', function(row){
         todos.push(row);
@@ -61,7 +61,7 @@ app.delete('/remove', urlEncodedParser, function(req, res){
     if(err){
       console.log(err);
     } else {
-      client.query('DELETE FROM tasks WHERE id=$1',[todos.task]);
+      client.query('DELETE FROM tasks WHERE id=$1',[req.body.id]);
         done();
         res.send('removed');
     }

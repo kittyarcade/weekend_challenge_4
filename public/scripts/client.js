@@ -1,7 +1,7 @@
 $(document).ready(function(){
   console.log('meow');
 
-
+var items = [];
 //button to add new task and then run newTask function
 $('#addTask').on('click', function(){
   console.log('clicked');
@@ -10,6 +10,7 @@ $('#addTask').on('click', function(){
 });
 
 $(document).on('click', '.remove', removeTask);
+
 
 //newTask function creates object
 var newTask = function(){
@@ -38,6 +39,7 @@ function getTasks(){
       $('#theTasks').html('');
       var outputText = '';
       for(var i = 0; i < response.length; i++){
+      items.push(response[i]);
         outputText += '<p>' + response[i].task + '</p><p><button class="complete" data="' + response[i].id + '">Completed?</button><button class="remove" data="' + response[i].id + '">Remove</button></p>';
       }
       $('#theTasks').html(outputText);
@@ -50,6 +52,7 @@ function removeTask(){
     id: $(this).attr('data')
   };
   console.log(deleteItem);
+  console.log(objectToSend);
   $.ajax ({
     type: 'DELETE',
     url: 'remove',
@@ -57,10 +60,11 @@ function removeTask(){
     success: function(response){
       console.log('from delete');
     },
-    error: function(){
+    error: function(response){
       console.log('error with ajax');
     }
   });//end ajax call
+  getTasks();
 }//end removeTask function
 
 }); //end document ready
